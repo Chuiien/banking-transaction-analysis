@@ -71,6 +71,8 @@ Giá trị mang lại:
   **Phương pháp:**
 - Tổng hợp dữ liệu ở cấp độ khách hàng
 - Sử dụng hàm RANK() để xếp hạng theo giá trị giao dịch
+  
+```sql  
 WITH customer_summary AS (
     SELECT
         CustomerID AS customer_id,
@@ -86,6 +88,7 @@ SELECT
     RANK() OVER (ORDER BY total_transaction_amount DESC) AS customer_rank
 FROM customer_summary
 ORDER BY customer_rank;
+```
 
   **Insight chính:**
 - Một tỷ lệ nhỏ khách hàng tạo ra phần lớn giá trị giao dịch
@@ -99,6 +102,7 @@ NOTE: Việc xếp hạng giúp ngân hàng ưu tiên nguồn lực chăm sóc h
 - Phân tích giá trị giao dịch theo tài khoản
 
 NOTE: CustomerID được sử dụng như account_id trong phạm vi dự án.
+```sql
 SELECT
     CustomerID AS account_id,
     COUNT(TransactionID) AS total_transactions,
@@ -106,6 +110,7 @@ SELECT
 FROM transactions
 GROUP BY CustomerID
 ORDER BY total_transaction_amount DESC;
+```
 
   **Insight chính:**
 - Một số tài khoản có tần suất và giá trị giao dịch vượt trội
@@ -118,6 +123,7 @@ ORDER BY total_transaction_amount DESC;
 
 NOTE: Ngày giao dịch được chuyển đổi từ dạng dd-mm-yyyy sang kiểu date trước khi phân tích.
 
+```sql
 WITH parsed_transactions AS (
     SELECT
         TransactionID,
@@ -132,6 +138,7 @@ SELECT
 FROM parsed_transactions
 GROUP BY DATE_FORMAT(transaction_date, '%Y-%m')
 ORDER BY transaction_month;
+```
 
   **Insight chính:**
 - Giao dịch có tính chu kỳ theo thời gian
