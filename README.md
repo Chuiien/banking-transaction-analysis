@@ -71,9 +71,6 @@ Giá trị mang lại:
   **Phương pháp:**
 - Tổng hợp dữ liệu ở cấp độ khách hàng
 - Sử dụng hàm RANK() để xếp hạng theo giá trị giao dịch
-
-SQL:
-
 WITH customer_summary AS (
     SELECT
         CustomerID AS customer_id,
@@ -102,9 +99,6 @@ NOTE: Việc xếp hạng giúp ngân hàng ưu tiên nguồn lực chăm sóc h
 - Phân tích giá trị giao dịch theo tài khoản
 
 NOTE: CustomerID được sử dụng như account_id trong phạm vi dự án.
-
-SQL:
-
 SELECT
     CustomerID AS account_id,
     COUNT(TransactionID) AS total_transactions,
